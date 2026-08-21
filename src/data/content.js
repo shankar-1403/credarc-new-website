@@ -9,6 +9,7 @@ export const company = {
 };
 
 export const navItems = [
+  { name: "Home", link: "/" },
   { name: "Why now", link: "/why-now" },
   { name: "Platform", link: "/platform" },
   { name: "Value", link: "/value" },

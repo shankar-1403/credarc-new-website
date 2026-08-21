@@ -1,6 +1,11 @@
 import { useState } from "react";
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import {
+  motion,
+  AnimatePresence,
+  LayoutGroup,
+  useReducedMotion,
+} from "framer-motion";
+import { ArrowRight } from "lucide-react";
 import FadeIn from "../components/FadeIn";
 import {
   ButtonLink,
@@ -45,12 +50,13 @@ const phaseMeta = [
   },
 ];
 
+const ease = [0.22, 1, 0.36, 1];
+
 export default function Roadmap() {
   const [active, setActive] = useState(0);
   const reduce = useReducedMotion();
   const current = roadmap[active];
   const meta = phaseMeta[active];
-  const progress = ((active + 1) / roadmap.length) * 100;
 
   return (
     <>
@@ -61,10 +67,8 @@ export default function Roadmap() {
         image="/images/renewables.jpg"
       />
 
-      <section className="relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_top,rgba(2,47,132,0.06),transparent_55%)]" />
-
-        <div className="relative mx-auto max-w-7xl px-6 py-20 md:px-8 md:py-28">
+      <section className="relative">
+        <div className="mx-auto max-w-7xl px-6 py-20 md:px-8 md:py-28">
           <FadeIn>
             <SectionHeading
               label="The expansion path"
@@ -73,97 +77,73 @@ export default function Roadmap() {
             />
           </FadeIn>
 
-          {/* Progress track */}
-          <FadeIn className="mt-14" delay={0.05}>
-            <div className="relative">
-              <div className="absolute top-5 right-0 left-0 hidden h-[2px] bg-[#D5DDE8] md:block" />
-              <motion.div
-                className="absolute top-5 left-0 hidden h-[2px] origin-left bg-gradient-to-r from-[#1A9B8E] to-[#022F84] md:block"
-                initial={false}
-                animate={{ width: `${progress}%` }}
-                transition={{ duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
-              />
-
-              <div className="flex gap-3 overflow-x-auto pb-2 md:grid md:grid-cols-6 md:gap-4 md:overflow-visible md:pb-0">
+          <FadeIn className="mt-12" delay={0.05}>
+            <LayoutGroup>
+              <div className="flex gap-1 overflow-x-auto pb-1">
                 {roadmap.map((phase, i) => {
                   const isActive = i === active;
-                  const isPast = i < active;
-                  const isLive = phase.timing === "Live now";
 
                   return (
                     <button
                       key={phase.phase}
                       type="button"
                       onClick={() => setActive(i)}
-                      className="group relative flex min-w-[9.5rem] flex-col items-start text-left md:min-w-0"
+                      aria-pressed={isActive}
+                      className={cn(
+                        "relative shrink-0 rounded-full px-4 py-2.5 text-left transition-colors duration-200",
+                        isActive
+                          ? "text-white"
+                          : "text-[#5A6B7D] hover:text-[#022F84]"
+                      )}
                     >
-                      <span
-                        className={cn(
-                          "relative z-10 flex size-10 items-center justify-center rounded-full text-sm font-bold transition duration-300",
-                          isActive
-                            ? "bg-[#022F84] text-white shadow-[0_10px_30px_-8px_rgba(2,47,132,0.55)] scale-110"
-                            : isPast || isLive
-                              ? "bg-[#1A9B8E] text-white"
-                              : "bg-white text-[#5A6B7D] ring-1 ring-[#D5DDE8] group-hover:ring-[#022F84]/40"
-                        )}
-                      >
-                        {isPast || isLive ? (
-                          <CheckCircle2 className="size-5" strokeWidth={2.25} />
-                        ) : (
-                          phase.phase
-                        )}
-                      </span>
-                      <span
-                        className={cn(
-                          "mt-4 text-[11px] font-semibold uppercase tracking-[0.14em]",
-                          isActive ? "text-[#1A9B8E]" : "text-[#5A6B7D]"
-                        )}
-                      >
-                        {phase.timing}
-                      </span>
-                      <span
-                        className={cn(
-                          "font-display mt-1 text-sm font-bold leading-snug transition",
-                          isActive
-                            ? "text-[#022F84]"
-                            : "text-[#0A1628] group-hover:text-[#022F84]"
-                        )}
-                      >
-                        {phase.title}
+                      {isActive && !reduce ? (
+                        <motion.span
+                          layoutId="roadmap-pill"
+                          className="absolute inset-0 rounded-full bg-[#022F84]"
+                          transition={{
+                            type: "spring",
+                            stiffness: 420,
+                            damping: 34,
+                          }}
+                        />
+                      ) : isActive ? (
+                        <span className="absolute inset-0 rounded-full bg-[#022F84]" />
+                      ) : null}
+
+                      <span className="relative flex items-center gap-2">
+                        <span className="text-[11px] font-semibold tabular-nums tracking-wide opacity-70">
+                          0{phase.phase}
+                        </span>
+                        <span className="font-display text-sm font-bold whitespace-nowrap">
+                          {phase.title}
+                        </span>
                       </span>
                     </button>
                   );
                 })}
               </div>
-            </div>
+            </LayoutGroup>
           </FadeIn>
 
-          {/* Active phase spotlight */}
-          <div className="mt-12 overflow-hidden rounded-[2rem] bg-[#011B4D]">
+          <div className="mt-8 overflow-hidden rounded-[1.75rem] bg-[#011B4D]">
             <AnimatePresence mode="wait">
               <motion.div
                 key={current.phase}
-                initial={reduce ? false : { opacity: 0, y: 18 }}
+                initial={reduce ? false : { opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
-                exit={reduce ? undefined : { opacity: 0, y: -12 }}
-                transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-                className="grid lg:grid-cols-[1.05fr_0.95fr]"
+                exit={reduce ? undefined : { opacity: 0, y: -8 }}
+                transition={{ duration: 0.32, ease }}
+                className="grid lg:grid-cols-2"
               >
-                <div className="relative min-h-[280px] overflow-hidden lg:min-h-[420px]">
+                <div className="relative min-h-[240px] overflow-hidden lg:min-h-[420px]">
                   <motion.img
                     src={meta.image}
                     alt=""
                     className="absolute inset-0 h-full w-full object-cover"
-                    initial={reduce ? false : { scale: 1.06 }}
+                    initial={reduce ? false : { scale: 1.04 }}
                     animate={{ scale: 1 }}
-                    transition={{ duration: 0.7 }}
+                    transition={{ duration: 0.7, ease }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#011B4D] via-[#011B4D]/35 to-transparent lg:bg-gradient-to-r" />
-                  <div className="absolute bottom-6 left-6 right-6 lg:hidden">
-                    <p className="font-display text-4xl font-extrabold text-white/20">
-                      0{current.phase}
-                    </p>
-                  </div>
                 </div>
 
                 <div className="flex flex-col justify-center px-8 py-10 md:px-12 md:py-14">
@@ -176,15 +156,15 @@ export default function Roadmap() {
                     </span>
                   </div>
 
-                  <h3 className="font-display mt-5 text-3xl font-extrabold text-white sm:text-4xl md:text-5xl">
+                  <h3 className="font-display mt-5 text-3xl font-extrabold text-white sm:text-4xl">
                     {current.title}
                   </h3>
                   <p className="mt-2 text-lg text-white/55">{current.detail}</p>
-                  <p className="mt-6 max-w-md text-base leading-relaxed text-white/80">
+                  <p className="mt-5 max-w-md text-base leading-relaxed text-white/80">
                     {meta.summary}
                   </p>
 
-                  <div className="mt-10 flex flex-wrap items-center gap-4">
+                  <div className="mt-8 flex flex-wrap items-center gap-5">
                     <ButtonLink to="/contact" variant="teal">
                       Request a demo
                       <ArrowRight className="size-4" />
@@ -194,9 +174,9 @@ export default function Roadmap() {
                       onClick={() =>
                         setActive((prev) => (prev + 1) % roadmap.length)
                       }
-                      className="text-sm font-semibold text-white/70 transition hover:text-white"
+                      className="text-sm font-semibold text-white/70 transition hover:text-white flex items-center gap-2"
                     >
-                      Next phase →
+                      Next phase <ArrowRight className="size-4" />
                     </button>
                   </div>
                 </div>
@@ -215,7 +195,6 @@ export default function Roadmap() {
         </div>
       </section>
 
-      {/* Compounding cascade */}
       <section className="relative overflow-hidden border-y border-[#D5DDE8]">
         <img
           src="/images/supply-chain.jpg"
