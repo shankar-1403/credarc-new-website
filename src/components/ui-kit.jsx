@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { ArrowRight } from "lucide-react";
 import { cn } from "../lib/utils";
+import { AuroraBackground } from "./ui/aurora-background";
 
 export function ButtonLink({
   to,
@@ -124,9 +125,8 @@ export function PageHero({
 
 export function CTABanner() {
   return (
-    <section className="relative overflow-hidden border-y border-[#022F84]/10 bg-[#022F84]">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_90%_10%,rgba(26,155,142,0.35),transparent_40%)]" />
-      <div className="relative mx-auto flex max-w-7xl flex-col gap-6 px-6 py-16 md:flex-row md:items-center md:justify-between md:px-8">
+    <AuroraBackground>
+      <div className="w-full relative mx-auto flex max-w-7xl flex-col gap-6 px-6 py-16 md:flex-row md:items-center md:justify-between md:px-8">
         <div className="max-w-2xl">
           <SectionLabel>Get in touch</SectionLabel>
           <h2 className="font-display text-3xl font-bold text-white sm:text-4xl">
@@ -142,6 +142,6 @@ export function CTABanner() {
           <ArrowRight className="size-4" />
         </ButtonLink>
       </div>
-    </section>
+    </AuroraBackground>
   );
 }

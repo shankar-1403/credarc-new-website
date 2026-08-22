@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { company, navItems } from "../data/content";
-import Logo from "../assets/credarc-dark.png";
+import Logo from "../assets/credarc_dark.webp";
+import { motion } from "framer-motion";
 
 export default function Footer() {
   return (
@@ -65,6 +66,17 @@ export default function Footer() {
           </ul>
         </div>
       </div>
+      <motion.div
+        aria-hidden
+        className="pointer-events-none absolute inset-x-0 top-[18%] select-none overflow-hidden px-2 md:top-[14%]"
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
+      >
+        <p className="font-display text-center text-[18vw] leading-[0.85] font-extrabold tracking-[-0.06em] text-[#1A9B8E]/[0.05] uppercase sm:text-[15vw] md:text-[13vw]">
+          CredArc
+        </p>
+      </motion.div>
 
       <div className="border-t border-[#D5DDE8]">
         <div className="mx-auto flex max-w-7xl flex-col gap-2 px-6 py-5 text-xs text-[#5A6B7D] sm:flex-row sm:items-center sm:justify-between md:px-8">

@@ -8,8 +8,8 @@ import {
   useScroll,
   useMotionValueEvent,
 } from "framer-motion";
-import LogoDark from "../../assets/credarc-dark.png";
-import LogoLight from "../../assets/credarc-white.png";
+import LogoDark from "../../assets/credarc_dark.webp";
+import LogoLight from "../../assets/credarc_white.webp";
 import React, { useRef, useState } from "react";
 
 export const Navbar = ({ children, className }) => {
@@ -207,7 +207,7 @@ export const NavbarLogo = ({ visible }) => {
         alt="CredArc Logo"
         className={cn(
           "w-auto transition-all duration-300",
-          visible ? "h-8" : "h-10"
+          visible ? "h-12" : "h-12"
         )}
       />
     </Link>
