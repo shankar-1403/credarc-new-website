@@ -1,26 +1,14 @@
 import { Link } from "react-router-dom";
 import { motion, useReducedMotion } from "framer-motion";
-import { ArrowRight, ArrowDownRight } from "lucide-react";
+import { ArrowRight, ArrowDownRight, Building2, Network, Share2 } from "lucide-react";
 import FadeIn from "../components/FadeIn";
-import {
-    ButtonLink,
-    CTABanner,
-    SectionHeading,
-} from "../components/ui-kit";
-import {
-    company,
-    compounding,
-    forces,
-    heroStats,
-    platformSteps,
-    roadmap,
-} from "../data/content";
+import {ButtonLink,CTABanner,SectionHeading} from "../components/ui-kit";
+import {company,compounding,forces,heroStats,platformSteps,roadmap} from "../data/content";
 
-const heroStatImages = [
-    "/images/listed-companies.jpg",
-    "/images/platform-decide.jpg",
-    "/images/export-trade.jpg",
-    "/images/renewables.jpg",
+const cascadeSteps = [
+    { label: "Starts here", icon: Building2 },
+    { label: "First ring", icon: Network },
+    { label: "The long tail", icon: Share2 },
 ];
 
 const heroLines = [
@@ -268,10 +256,10 @@ export default function Home() {
                         <p className="mb-3 text-xs font-semibold tracking-[0.18em] text-[#7FD4CB] uppercase">
                             The platform
                         </p>
-                        <h2 className="font-display text-3xl font-bold tracking-tight text-white text-balance sm:text-4xl md:text-5xl">
+                        <h4 className="font-display text-3xl font-bold tracking-tight text-white text-balance sm:text-4xl md:text-5xl">
                             The old cost curve made ESG a luxury.{" "}
                             <span className="text-[#7FD4CB]">AI removes it.</span>
-                        </h2>
+                        </h4>
                         <p className="mt-4 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
                             Capture, generate, decide and assure — one engine built for
                             low-digitisation environments and assurance-grade outcomes.
@@ -289,9 +277,9 @@ export default function Home() {
                                     <p className="font-nav mt-3 text-xs font-semibold tracking-[0.18em] text-[#7FD4CB] uppercase">
                                         {step.title}
                                     </p>
-                                    <h3 className="font-display mt-2 text-xl font-bold text-white">
+                                    <h5 className="font-display mt-2 text-xl font-bold text-white">
                                         {step.headline}
-                                    </h3>
+                                    </h5>
                                     <p className="mt-2 text-sm leading-relaxed text-white/55">
                                         {step.body}
                                     </p>
@@ -318,29 +306,59 @@ export default function Home() {
                     />
                 </FadeIn>
 
-                <div className="mt-10 grid gap-8 sm:grid-cols-3 sm:gap-6 lg:gap-10">
-                    {compounding.map((item, i) => (
-                        <FadeIn key={item.title} delay={i * 0.07}>
-                            <div className="relative border-t border-[#D5DDE8] pt-5">
-                                <p className="font-display text-4xl font-extrabold text-[#022F84]/20 sm:text-5xl">
-                                    {item.value}
-                                </p>
-                                <h3 className="font-display mt-2 text-xl font-bold text-[#0A1628]">
-                                    {item.title}
-                                </h3>
-                                <p className="mt-2 text-sm leading-relaxed text-[#5A6B7D]">
-                                    {item.body}
-                                </p>
-                                {i < compounding.length - 1 ? (
-                                    <p className="mt-4 flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.16em] text-[#5A6B7D]/70 uppercase">
-                                        Cascades
-                                        <ArrowRight className="size-3" />
-                                    </p>
-                                ) : null}
-                            </div>
-                        </FadeIn>
-                    ))}
-                </div>
+                <FadeIn className="mt-12">
+                    <div className="overflow-hidden rounded-3xl bg-white ring-1 ring-[#D5DDE8]">
+                        <div className="grid lg:grid-cols-3">
+                            {compounding.map((item, i) => {
+                                const step = cascadeSteps[i];
+                                const Icon = step.icon;
+
+                                return (
+                                    <div
+                                        key={item.title}
+                                        className="relative flex flex-col p-7 md:p-8"
+                                    >
+                                        {i < compounding.length - 1 ? (
+                                            <div className="absolute right-0 bottom-8 hidden w-px bg-[#D5DDE8] lg:top-8 lg:block" />
+                                        ) : null}
+                                        {i > 0 ? (
+                                            <span className="absolute top-1/2 left-0 z-10 hidden size-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#1A9B8E] ring-1 ring-[#D5DDE8] lg:flex">
+                                                <ArrowRight className="size-4" />
+                                            </span>
+                                        ) : null}
+
+                                        <span className="flex size-11 items-center justify-center rounded-2xl bg-[#E6F5F3] text-[#1A9B8E]">
+                                            <Icon className="size-5" strokeWidth={2} />
+                                        </span>
+                                        <p className="mt-5 text-[11px] font-semibold tracking-[0.16em] text-[#1A9B8E] uppercase">
+                                            {step.label}
+                                        </p>
+                                        <h5 className="font-display mt-2 text-xl font-bold text-[#0A1628]">
+                                            {item.title}
+                                        </h5>
+                                        <p className="mt-3 flex-1 text-sm leading-relaxed text-[#5A6B7D]">
+                                            {item.body}
+                                        </p>
+                                        <div className="mt-6 h-1 overflow-hidden rounded-full bg-[#E8EEF8]">
+                                            <div
+                                                className="h-full rounded-full bg-[#1A9B8E]"
+                                                style={{
+                                                    width: `${((i + 1) / compounding.length) * 100}%`,
+                                                }}
+                                            />
+                                        </div>
+                                        {i < compounding.length - 1 ? (
+                                            <p className="mt-4 flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.16em] text-[#1A9B8E] uppercase lg:hidden">
+                                                Cascades
+                                                <ArrowRight className="size-3" />
+                                            </p>
+                                        ) : null}
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    </div>
+                </FadeIn>
             </section>
 
             <section className="relative overflow-hidden">

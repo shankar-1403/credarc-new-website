@@ -5,7 +5,7 @@ import Logo from "../assets/credarc-dark.png";
 export default function Footer() {
   return (
     <footer className="border-t border-[#D5DDE8] bg-white/70 backdrop-blur-sm">
-      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-[1.2fr_1fr_1fr] md:px-8">
+      <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-[1fr_1fr_1fr] md:px-8">
         <div>
           <Link to="/" className="inline-block">
             <img src={Logo} alt="CredArc Logo" className="h-10 w-auto" />
@@ -20,7 +20,7 @@ export default function Footer() {
           <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#1A9B8E]">
             Explore
           </p>
-          <ul className="mt-4 space-y-2">
+          <ul className="mt-4 space-y-2 grid grid-cols-2">
             {navItems.map((item) => (
               <li key={item.link}>
                 <Link

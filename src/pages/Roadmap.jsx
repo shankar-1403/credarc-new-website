@@ -5,7 +5,7 @@ import {
   LayoutGroup,
   useReducedMotion,
 } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Building2, Network, Share2 } from "lucide-react";
 import FadeIn from "../components/FadeIn";
 import {
   ButtonLink,
@@ -51,6 +51,12 @@ const phaseMeta = [
 ];
 
 const ease = [0.22, 1, 0.36, 1];
+
+const cascadeSteps = [
+  { label: "Starts here", icon: Building2 },
+  { label: "First ring", icon: Network },
+  { label: "The long tail", icon: Share2 },
+];
 
 export default function Roadmap() {
   const [active, setActive] = useState(0);
@@ -214,29 +220,59 @@ export default function Roadmap() {
             />
           </FadeIn>
 
-          <div className="mt-14 grid gap-10 lg:grid-cols-3 lg:gap-8">
-            {compounding.map((item, i) => (
-              <FadeIn key={item.title} delay={i * 0.1}>
-                <div className="relative border-t border-white/20 pt-6">
-                  <p className="font-display text-5xl font-extrabold text-[#7FD4CB] sm:text-6xl">
-                    {item.value}
-                  </p>
-                  <h3 className="font-display mt-4 text-2xl font-bold text-white">
-                    {item.title}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-white/70">
-                    {item.body}
-                  </p>
-                  {i < compounding.length - 1 ? (
-                    <p className="mt-6 flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.16em] text-white/35 lg:mt-8">
-                      Cascades down
-                      <ArrowRight className="size-3.5" />
-                    </p>
-                  ) : null}
-                </div>
-              </FadeIn>
-            ))}
-          </div>
+          <FadeIn className="mt-14">
+            <div className="overflow-hidden rounded-3xl bg-white/8 ring-1 ring-white/15">
+              <div className="grid lg:grid-cols-3">
+                {compounding.map((item, i) => {
+                  const step = cascadeSteps[i];
+                  const Icon = step.icon;
+
+                  return (
+                    <div
+                      key={item.title}
+                      className="relative flex flex-col p-7 md:p-8"
+                    >
+                      {i < compounding.length - 1 ? (
+                        <div className="absolute right-0 bottom-8 hidden w-px bg-white/15 lg:top-8 lg:block" />
+                      ) : null}
+                      {i > 0 ? (
+                        <span className="absolute top-1/2 left-0 z-10 hidden size-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#011B4D] text-[#7FD4CB] ring-1 ring-white/20 lg:flex">
+                          <ArrowRight className="size-4" />
+                        </span>
+                      ) : null}
+
+                      <span className="flex size-11 items-center justify-center rounded-2xl bg-white/10 text-[#7FD4CB]">
+                        <Icon className="size-5" strokeWidth={2} />
+                      </span>
+                      <p className="mt-5 text-[11px] font-semibold tracking-[0.16em] text-[#7FD4CB] uppercase">
+                        {step.label}
+                      </p>
+                      <h3 className="font-display mt-2 text-xl font-bold text-white">
+                        {item.title}
+                      </h3>
+                      <p className="mt-3 flex-1 text-sm leading-relaxed text-white/70">
+                        {item.body}
+                      </p>
+                      <div className="mt-6 h-1 overflow-hidden rounded-full bg-white/10">
+                        <div
+                          className="h-full rounded-full bg-[#7FD4CB]"
+                          style={{
+                            width: `${((i + 1) / compounding.length) * 100}%`,
+                          }}
+                        />
+                      </div>
+                      {i < compounding.length - 1 ? (
+                        <p className="mt-4 flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.16em] text-[#7FD4CB] uppercase lg:hidden">
+                          Cascades
+                          <ArrowRight className="size-3" />
+                        </p>
+                      ) : null}
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </FadeIn>
 
           <FadeIn className="mt-12 max-w-2xl">
             <p className="text-base text-white/75">

@@ -1,3 +1,6 @@
+import { useRef } from "react";
+import { Clock, IndianRupee, CalendarClock } from "lucide-react";
+import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import FadeIn from "../components/FadeIn";
 import {
   ButtonLink,
@@ -6,6 +9,57 @@ import {
   SectionHeading,
 } from "../components/ui-kit";
 import { platformCosts, platformSteps } from "../data/content";
+
+const costIcons = [Clock, IndianRupee, CalendarClock];
+
+function ParallaxStep({ step, reversed }) {
+  const ref = useRef(null);
+  const reduce = useReducedMotion();
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start end", "end start"],
+  });
+
+  const imageY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    reduce ? [0, 0] : [-90, 90]
+  );
+  const textY = useTransform(
+    scrollYProgress,
+    [0, 1],
+    reduce ? [0, 0] : [36, -36]
+  );
+
+  return (
+    <article
+      ref={ref}
+      className={`grid items-center gap-8 lg:grid-cols-2 lg:gap-16 ${
+        reversed ? "lg:[&>*:first-child]:order-2" : ""
+      }`}
+    >
+      <div className="relative aspect-[16/10] overflow-hidden rounded-3xl">
+        <motion.img
+          src={step.image}
+          alt=""
+          className="absolute inset-x-0 -top-[18%] h-[136%] w-full object-cover will-change-transform"
+          style={{ y: imageY }}
+        />
+      </div>
+      <motion.div className="will-change-transform" style={{ y: textY }}>
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#1A9B8E]">
+          {step.step} · {step.title}
+        </p>
+        <h3 className="font-display mt-3 text-3xl font-bold text-[#0A1628]">
+          {step.headline}
+        </h3>
+        <p className="mt-4 text-base leading-relaxed text-[#5A6B7D] sm:text-lg">
+          {step.body}
+        </p>
+      </motion.div>
+    </article>
+  );
+}
 
 export default function Platform() {
   return (
@@ -22,17 +76,44 @@ export default function Platform() {
         }
       />
 
-      <section className="border-b border-[#D5DDE8] bg-white/70">
-        <div className="mx-auto grid max-w-7xl gap-6 px-6 py-14 sm:grid-cols-3 md:px-8">
-          {platformCosts.map((item, i) => (
-            <FadeIn key={item.label} delay={i * 0.08}>
-              <p className="font-display text-3xl font-extrabold text-[#022F84] sm:text-4xl">
-                {item.value}
-              </p>
-              <p className="mt-2 text-sm text-[#5A6B7D]">{item.label}</p>
-            </FadeIn>
-          ))}
-        </div>
+      <section className="relative z-10 px-6 md:px-8">
+        <FadeIn className="mx-auto max-w-7xl -mt-8">
+          <div className="overflow-hidden rounded-3xl bg-white shadow-[0_24px_60px_-28px_rgba(2,47,132,0.35)] ring-1 ring-[#D5DDE8]">
+            <div className="grid sm:grid-cols-3">
+              {platformCosts.map((item, i) => {
+                const Icon = costIcons[i];
+
+                return (
+                  <div
+                    key={item.label}
+                    className="group relative flex flex-col items-center px-5 py-5 md:px-6 md:py-6"
+                  >
+                    {i < platformCosts.length - 1 ? (
+                      <div className="absolute inset-y-5 right-0 hidden w-px bg-[#D5DDE8] sm:block" />
+                    ) : null}
+
+                    <span className="flex size-8 items-center justify-center rounded-xl bg-[#E6F5F3] text-[#1A9B8E] transition duration-300 group-hover:bg-[#1A9B8E] group-hover:text-white">
+                      <Icon className="size-4" strokeWidth={2} />
+                    </span>
+                    <p className="font-display mt-3 text-2xl font-extrabold tracking-tight text-[#022F84] sm:text-3xl">
+                      {item.value}
+                    </p>
+                    <p className="mt-1 max-w-[16rem] text-sm leading-snug text-[#5A6B7D]">
+                      {item.label}
+                    </p>
+                  </div>
+                );
+              })}
+            </div>
+            <motion.div
+              className="h-0.5 origin-left bg-[#1A9B8E]"
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7, delay: 0.2, ease: [0.22, 1, 0.36, 1] }}
+            />
+          </div>
+        </FadeIn>
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-20 md:px-8 md:py-28">
@@ -44,32 +125,13 @@ export default function Platform() {
           />
         </FadeIn>
 
-        <div className="mt-16 space-y-16">
+        <div className="mt-16 space-y-24 lg:space-y-32">
           {platformSteps.map((step, i) => (
-            <FadeIn key={step.step}>
-              <div
-                className={`grid items-center gap-10 lg:grid-cols-2 ${
-                  i % 2 === 1 ? "lg:[&>*:first-child]:order-2" : ""
-                }`}
-              >
-                <img
-                  src={step.image}
-                  alt=""
-                  className="aspect-[16/10] w-full rounded-3xl object-cover"
-                />
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#1A9B8E]">
-                    {step.step} · {step.title}
-                  </p>
-                  <h3 className="font-display mt-3 text-3xl font-bold text-[#0A1628]">
-                    {step.headline}
-                  </h3>
-                  <p className="mt-4 text-base leading-relaxed text-[#5A6B7D] sm:text-lg">
-                    {step.body}
-                  </p>
-                </div>
-              </div>
-            </FadeIn>
+            <ParallaxStep
+              key={step.step}
+              step={step}
+              reversed={i % 2 === 1}
+            />
           ))}
         </div>
 
