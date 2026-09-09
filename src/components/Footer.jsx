@@ -9,7 +9,7 @@ export default function Footer() {
       <div className="mx-auto grid max-w-7xl gap-10 px-6 py-14 md:grid-cols-[1fr_1fr_1fr] md:px-8">
         <div>
           <Link to="/" className="inline-block">
-            <img src={Logo} alt="CredArc Logo" className="h-10 w-auto" />
+            <img src={Logo} alt="CredArc Logo" className="h-12 w-auto" />
           </Link>
           <p className="mt-4 max-w-sm text-sm leading-relaxed text-[#5A6B7D]">
             {company.tagline}. An India-native ESG platform already live in
@@ -18,7 +18,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#1A9B8E]">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#022B99]">
             Explore
           </p>
           <ul className="mt-4 space-y-2 grid grid-cols-2">
@@ -44,7 +44,7 @@ export default function Footer() {
         </div>
 
         <div>
-          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#1A9B8E]">
+          <p className="text-xs font-semibold uppercase tracking-[0.16em] text-[#022B99]">
             Contact
           </p>
           <ul className="mt-4 space-y-3 text-sm text-[#5A6B7D]">
@@ -73,7 +73,7 @@ export default function Footer() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.1, ease: [0.22, 1, 0.36, 1] }}
       >
-        <p className="font-display text-center text-[18vw] leading-[0.85] font-extrabold tracking-[-0.06em] text-[#1A9B8E]/[0.05] uppercase sm:text-[15vw] md:text-[13vw]">
+        <p className="font-display text-center text-[18vw] leading-[0.85] font-extrabold tracking-[-0.06em] text-[#022B99]/[0.05] uppercase sm:text-[15vw] md:text-[13vw]">
           CredArc
         </p>
       </motion.div>

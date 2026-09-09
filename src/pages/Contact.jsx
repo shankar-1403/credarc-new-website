@@ -30,7 +30,7 @@ export default function Contact() {
             </h2>
             <div className="mt-8 space-y-6 text-sm leading-relaxed text-[#5A6B7D]">
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#1A9B8E]">
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#022B99]">
                   Email
                 </p>
                 <a
@@ -41,14 +41,14 @@ export default function Contact() {
                 </a>
               </div>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#1A9B8E]">
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#022B99]">
                   Entity
                 </p>
                 <p className="mt-1 text-[#0A1628]">{company.legal}</p>
                 <p className="mt-1">CIN {company.cin}</p>
               </div>
               <div>
-                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#1A9B8E]">
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[#022B99]">
                   Registered office
                 </p>
                 <p className="mt-1 max-w-sm">{company.office}</p>
@@ -60,7 +60,7 @@ export default function Contact() {
             <div className="rounded-3xl bg-white/90 p-6 ring-1 ring-[#D5DDE8] sm:p-8">
               {submitted ? (
                 <div className="flex min-h-80 flex-col justify-center">
-                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#1A9B8E]">
+                  <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#022B99]">
                     Request received
                   </p>
                   <h3 className="font-display mt-3 text-3xl font-bold text-[#0A1628]">

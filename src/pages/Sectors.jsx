@@ -66,7 +66,7 @@ export default function Sectors() {
                     <span
                       className={cn(
                         "font-nav w-8 shrink-0 text-xs font-semibold tabular-nums transition",
-                        isActive ? "text-[#1A9B8E]" : "text-[#5A6B7D]"
+                        isActive ? "text-[#022B99]" : "text-[#5A6B7D]"
                       )}
                     >
                       {String(i + 1).padStart(2, "0")}
@@ -85,7 +85,7 @@ export default function Sectors() {
                       className={cn(
                         "size-4 shrink-0 transition",
                         isActive
-                          ? "translate-x-0 text-[#1A9B8E] opacity-100"
+                          ? "translate-x-0 text-[#022B99] opacity-100"
                           : "-translate-x-1 text-[#5A6B7D] opacity-0 group-hover:translate-x-0 group-hover:opacity-60"
                       )}
                     />
@@ -116,7 +116,7 @@ export default function Sectors() {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#011B4D] via-[#011B4D]/40 to-transparent" />
                   <div className="absolute right-5 bottom-5 left-5">
-                    <p className="font-nav text-xs font-semibold uppercase tracking-[0.18em] text-[#7FD4CB]">
+                    <p className="font-nav text-xs font-semibold uppercase tracking-[0.18em] text-[#07A1EB]">
                       Sector {String(active + 1).padStart(2, "0")} / 12
                     </p>
                     <h3 className="font-display mt-2 text-2xl font-bold text-white sm:text-3xl">
@@ -135,7 +135,7 @@ export default function Sectors() {
                     </p>
                   </div>
                   <div className="border-t border-white/10 p-6 sm:p-8">
-                    <p className="font-nav text-[11px] font-semibold uppercase tracking-[0.16em] text-[#7FD4CB]">
+                    <p className="font-nav text-[11px] font-semibold uppercase tracking-[0.16em] text-[#07A1EB]">
                       What CredArc delivers
                     </p>
                     <p className="mt-3 text-sm leading-relaxed text-white/75">
@@ -162,7 +162,7 @@ export default function Sectors() {
                     onClick={() => setActive(i)}
                     className="flex w-full items-center gap-3 px-4 py-4 text-left"
                   >
-                    <span className="font-nav text-xs font-semibold text-[#7FD4CB]">
+                    <span className="font-nav text-xs font-semibold text-[#07A1EB]">
                       {String(i + 1).padStart(2, "0")}
                     </span>
                     <span className="font-display flex-1 text-base font-bold text-white">
@@ -171,7 +171,7 @@ export default function Sectors() {
                     <span
                       className={cn(
                         "text-lg text-white/50 transition",
-                        isOpen && "rotate-45 text-[#7FD4CB]"
+                        isOpen && "rotate-45 text-[#07A1EB]"
                       )}
                     >
                       +
@@ -202,7 +202,7 @@ export default function Sectors() {
                             </p>
                           </div>
                           <div>
-                            <p className="font-nav text-[11px] font-semibold uppercase tracking-[0.16em] text-[#7FD4CB]">
+                            <p className="font-nav text-[11px] font-semibold uppercase tracking-[0.16em] text-[#07A1EB]">
                               What CredArc delivers
                             </p>
                             <p className="mt-2 text-sm leading-relaxed text-white/75">

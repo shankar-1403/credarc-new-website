@@ -100,10 +100,10 @@ export default function WhoItServes() {
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[#011B4D] via-[#011B4D]/25 to-transparent" />
 
                 <div className="absolute right-6 bottom-6 left-6">
-                  <span className="mb-3 flex size-10 items-center justify-center rounded-xl bg-white/10 text-[#7FD4CB] ring-1 ring-white/15">
+                  <span className="mb-3 flex size-10 items-center justify-center rounded-xl bg-white/10 text-[#07A1EB] ring-1 ring-white/15">
                     <CurrentIcon className="size-4" />
                   </span>
-                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#7FD4CB]">
+                  <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#07A1EB]">
                     {current.badge}
                   </p>
                   <p className="font-display mt-1 text-2xl font-bold text-white">
@@ -150,16 +150,16 @@ export default function WhoItServes() {
                       className="absolute inset-0 h-full w-full object-cover"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-[#011B4D]/70 to-transparent" />
-                    <p className="absolute bottom-4 left-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#7FD4CB]">
+                    <p className="absolute bottom-4 left-4 text-xs font-semibold uppercase tracking-[0.16em] text-[#07A1EB]">
                       {segment.badge}
                     </p>
                   </div>
 
                   <div className="flex items-center gap-3">
-                    <span className="flex size-9 items-center justify-center rounded-xl bg-[#E6F5F3] text-[#1A9B8E]">
+                    <span className="flex size-9 items-center justify-center rounded-xl bg-[#E6F5F3] text-[#022B99]">
                       <Icon className="size-4" strokeWidth={2} />
                     </span>
-                    <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#1A9B8E]">
+                    <p className="text-[11px] font-semibold uppercase tracking-[0.16em] text-[#022B99]">
                       {segment.tab}
                     </p>
                   </div>
@@ -175,7 +175,7 @@ export default function WhoItServes() {
                     {segment.points.map((point) => (
                       <div
                         key={point.title}
-                        className="border-l-2 border-[#1A9B8E]/70 pl-4"
+                        className="border-l-2 border-[#022B99]/70 pl-4"
                       >
                         <h3 className="font-display text-base font-bold text-[#0A1628]">
                           {point.title}

@@ -154,10 +154,10 @@ export default function Roadmap() {
 
                 <div className="flex flex-col justify-center px-8 py-10 md:px-12 md:py-14">
                   <div className="flex flex-wrap items-center gap-3">
-                    <span className="rounded-full bg-[#1A9B8E] px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-white">
+                    <span className="rounded-full bg-[#022B99] px-3 py-1 text-xs font-semibold uppercase tracking-[0.14em] text-white">
                       Phase {current.phase}
                     </span>
-                    <span className="text-sm font-medium text-[#7FD4CB]">
+                    <span className="text-sm font-medium text-[#07A1EB]">
                       {current.timing}
                     </span>
                   </div>
@@ -236,15 +236,15 @@ export default function Roadmap() {
                         <div className="absolute right-0 bottom-8 hidden w-px bg-white/15 lg:top-8 lg:block" />
                       ) : null}
                       {i > 0 ? (
-                        <span className="absolute top-1/2 left-0 z-10 hidden size-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#011B4D] text-[#7FD4CB] ring-1 ring-white/20 lg:flex">
+                        <span className="absolute top-1/2 left-0 z-10 hidden size-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-[#011B4D] text-[#07A1EB] ring-1 ring-white/20 lg:flex">
                           <ArrowRight className="size-4" />
                         </span>
                       ) : null}
 
-                      <span className="flex size-11 items-center justify-center rounded-2xl bg-white/10 text-[#7FD4CB]">
+                      <span className="flex size-11 items-center justify-center rounded-2xl bg-white/10 text-[#07A1EB]">
                         <Icon className="size-5" strokeWidth={2} />
                       </span>
-                      <p className="mt-5 text-[11px] font-semibold tracking-[0.16em] text-[#7FD4CB] uppercase">
+                      <p className="mt-5 text-[11px] font-semibold tracking-[0.16em] text-[#07A1EB] uppercase">
                         {step.label}
                       </p>
                       <h3 className="font-display mt-2 text-xl font-bold text-white">
@@ -255,14 +255,14 @@ export default function Roadmap() {
                       </p>
                       <div className="mt-6 h-1 overflow-hidden rounded-full bg-white/10">
                         <div
-                          className="h-full rounded-full bg-[#7FD4CB]"
+                          className="h-full rounded-full bg-[#07A1EB]"
                           style={{
                             width: `${((i + 1) / compounding.length) * 100}%`,
                           }}
                         />
                       </div>
                       {i < compounding.length - 1 ? (
-                        <p className="mt-4 flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.16em] text-[#7FD4CB] uppercase lg:hidden">
+                        <p className="mt-4 flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.16em] text-[#07A1EB] uppercase lg:hidden">
                           Cascades
                           <ArrowRight className="size-3" />
                         </p>

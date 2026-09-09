@@ -47,7 +47,7 @@ function ParallaxStep({ step, reversed }) {
         />
       </div>
       <motion.div className="will-change-transform" style={{ y: textY }}>
-        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#1A9B8E]">
+        <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#022B99]">
           {step.step} · {step.title}
         </p>
         <h3 className="font-display mt-3 text-3xl font-bold text-[#0A1628]">
@@ -92,7 +92,7 @@ export default function Platform() {
                       <div className="absolute inset-y-5 right-0 hidden w-px bg-[#D5DDE8] sm:block" />
                     ) : null}
 
-                    <span className="flex size-8 items-center justify-center rounded-xl bg-[#E6F5F3] text-[#1A9B8E] transition duration-300 group-hover:bg-[#1A9B8E] group-hover:text-white">
+                    <span className="flex size-8 items-center justify-center rounded-xl bg-[#E6F5F3] text-[#022B99] transition duration-300 group-hover:bg-[#022B99] group-hover:text-white">
                       <Icon className="size-4" strokeWidth={2} />
                     </span>
                     <p className="font-display mt-3 text-2xl font-extrabold tracking-tight text-[#022F84] sm:text-3xl">
@@ -106,7 +106,7 @@ export default function Platform() {
               })}
             </div>
             <motion.div
-              className="h-0.5 origin-left bg-[#1A9B8E]"
+              className="h-0.5 origin-left bg-[#022B99]"
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}
               viewport={{ once: true }}
@@ -136,7 +136,7 @@ export default function Platform() {
         </div>
 
         <FadeIn className="mt-20 max-w-3xl rounded-3xl bg-[#022F84] px-8 py-10 text-white">
-          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#7FD4CB]">
+          <p className="text-xs font-semibold uppercase tracking-[0.18em] text-[#07A1EB]">
             Why this matters commercially
           </p>
           <p className="font-display mt-3 text-2xl font-bold text-balance sm:text-3xl">

@@ -18,7 +18,7 @@ export function ButtonLink({
       "bg-white/90 text-[#022F84] ring-1 ring-white/60 hover:bg-white",
     outline:
       "bg-transparent text-[#022F84] ring-1 ring-[#022F84]/25 hover:bg-[#022F84]/5",
-    teal: "bg-[#1A9B8E] text-white hover:bg-[#158277]",
+    teal: "bg-[#022B99] text-white hover:bg-[#158277]",
     ghost:
       "bg-transparent text-white ring-1 ring-white/35 hover:bg-white/10",
   };
@@ -46,7 +46,7 @@ export function ButtonLink({
 
 export function SectionLabel({ children }) {
   return (
-    <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#1A9B8E]">
+    <p className="mb-3 text-xs font-semibold uppercase tracking-[0.18em] text-[#07A1EB]">
       {children}
     </p>
   );
@@ -106,7 +106,7 @@ export function PageHero({
           compact ? "min-h-[52vh]" : "min-h-[70vh]"
         )}
       >
-        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#7FD4CB]">
+        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#07A1EB]">
           {label}
         </p>
         <h1 className="font-display max-w-4xl text-4xl font-extrabold text-white text-balance sm:text-5xl md:text-6xl">

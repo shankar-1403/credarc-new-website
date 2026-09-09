@@ -207,7 +207,7 @@ export const NavbarLogo = ({ visible }) => {
         alt="CredArc Logo"
         className={cn(
           "w-auto transition-all duration-300",
-          visible ? "h-12" : "h-12"
+          visible ? "h-12" : "h-16"
         )}
       />
     </Link>
@@ -229,7 +229,7 @@ export const NavbarButton = ({
     secondary:
       "bg-transparent text-[#022F84] shadow-none ring-1 ring-[#022F84]/20",
     dark: "bg-[#0A1628] text-white",
-    gradient: "bg-gradient-to-b from-[#1A9B8E] to-[#158277] text-white",
+    gradient: "bg-gradient-to-b from-[#022B99] to-[#158277] text-white",
   };
 
   return (

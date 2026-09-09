@@ -44,7 +44,7 @@ export default function Home() {
                 {!reduce && (
                     <>
                         <motion.div
-                            className="pointer-events-none absolute -top-24 -right-16 size-[28rem] rounded-full bg-[#1A9B8E]/20 blur-3xl"
+                            className="pointer-events-none absolute -top-24 -right-16 size-[28rem] rounded-full bg-[#022B99]/20 blur-3xl"
                             animate={{ x: [0, -30, 0], y: [0, 20, 0] }}
                             transition={{ duration: 12, repeat: Infinity, ease: "easeInOut" }}
                         />
@@ -57,7 +57,7 @@ export default function Home() {
                 )}
 
                 <div className="pointer-events-none absolute inset-x-6 top-24 bottom-10 border border-white/10 md:inset-x-10 md:top-28 md:bottom-12" />
-                <div className="pointer-events-none absolute top-24 right-6 left-6 h-px bg-gradient-to-r from-transparent via-[#7FD4CB]/50 to-transparent md:top-28 md:right-10 md:left-10" />
+                <div className="pointer-events-none absolute top-24 right-6 left-6 h-px bg-gradient-to-r from-transparent via-[#07A1EB]/50 to-transparent md:top-28 md:right-10 md:left-10" />
 
                 <motion.div
                     aria-hidden
@@ -80,8 +80,8 @@ export default function Home() {
                                 animate={{ opacity: 1, x: 0 }}
                                 transition={{ duration: 0.55, delay: 0.2 }}
                             >
-                                <span className="h-px w-10 bg-[#7FD4CB]" />
-                                <p className="font-nav text-[11px] font-semibold tracking-[0.28em] text-[#7FD4CB] uppercase sm:text-xs">
+                                <span className="h-px w-10 bg-[#07A1EB]" />
+                                <p className="font-nav text-[11px] font-semibold tracking-[0.28em] text-[#07A1EB] uppercase sm:text-xs">
                                     CredArc Technologies
                                 </p>
                             </motion.div>
@@ -92,7 +92,7 @@ export default function Home() {
                                         key={line.text}
                                         className={
                                             line.tone === "teal"
-                                                ? "block text-[#7FD4CB]"
+                                                ? "block text-[#07A1EB]"
                                                 : "block text-white"
                                         }
                                         initial={reduce ? false : { opacity: 0, y: 28 }}
@@ -119,7 +119,7 @@ export default function Home() {
                                 {company.tagline}
                             </p>
                             <p className="mt-4 text-base leading-relaxed text-white/80 sm:text-lg">
-                                An India-native ESG platform, already live in production — for
+                                An India-native ESG platform, already live in production - for
                                 listed companies, MSMEs, government, exporters and the value
                                 chain behind them.
                             </p>
@@ -144,7 +144,7 @@ export default function Home() {
                 <div className="relative mx-auto max-w-7xl px-6 py-20 md:px-8 md:py-28">
                     <div className="grid gap-8 lg:grid-cols-[1fr_auto] lg:items-end">
                         <FadeIn>
-                            <p className="mb-3 text-xs font-semibold tracking-[0.18em] text-[#1A9B8E] uppercase">
+                            <p className="mb-3 text-xs font-semibold tracking-[0.18em] text-[#022B99] uppercase">
                                 The shift
                             </p>
                             <h2 className="font-display max-w-3xl text-3xl font-bold tracking-tight text-[#0A1628] text-balance sm:text-4xl md:text-5xl">
@@ -158,7 +158,7 @@ export default function Home() {
                         <FadeIn delay={0.1} className="lg:pb-1">
                             <Link
                                 to="/why-now"
-                                className="inline-flex items-center gap-2 text-sm font-semibold text-[#022F84] transition hover:text-[#1A9B8E]"
+                                className="inline-flex items-center gap-2 text-sm font-semibold text-[#022F84] transition hover:text-[#022B99]"
                             >
                                 Read the full story
                                 <ArrowRight className="size-4" />
@@ -201,7 +201,7 @@ export default function Home() {
                                                     <p className="font-display text-4xl leading-none font-extrabold tracking-[-0.04em] text-white/25 sm:text-5xl">
                                                         {String(i + 1).padStart(2, "0")}
                                                     </p>
-                                                    <p className="font-nav mt-2 text-xs font-semibold tracking-[0.18em] text-[#7FD4CB] uppercase">
+                                                    <p className="font-nav mt-2 text-xs font-semibold tracking-[0.18em] text-[#07A1EB] uppercase">
                                                         {force.title}
                                                     </p>
                                                 </div>
@@ -253,12 +253,12 @@ export default function Home() {
 
                 <div className="relative mx-auto max-w-7xl px-6 py-14 md:px-8 md:py-16">
                     <FadeIn className="max-w-3xl">
-                        <p className="mb-3 text-xs font-semibold tracking-[0.18em] text-[#7FD4CB] uppercase">
+                        <p className="mb-3 text-xs font-semibold tracking-[0.18em] text-[#07A1EB] uppercase">
                             The platform
                         </p>
                         <h4 className="font-display text-3xl font-bold tracking-tight text-white text-balance sm:text-4xl md:text-5xl">
                             The old cost curve made ESG a luxury.{" "}
-                            <span className="text-[#7FD4CB]">AI removes it.</span>
+                            <span className="text-[#07A1EB]">AI removes it.</span>
                         </h4>
                         <p className="mt-4 max-w-xl text-base leading-relaxed text-white/60 sm:text-lg">
                             Capture, generate, decide and assure — one engine built for
@@ -273,8 +273,8 @@ export default function Home() {
                                     <p className="font-display text-4xl font-extrabold text-white/15">
                                         {step.step}
                                     </p>
-                                    <div className="mt-2 h-px w-8 bg-[#1A9B8E]" />
-                                    <p className="font-nav mt-3 text-xs font-semibold tracking-[0.18em] text-[#7FD4CB] uppercase">
+                                    <div className="mt-2 h-px w-8 bg-[#022B99]" />
+                                    <p className="font-nav mt-3 text-xs font-semibold tracking-[0.18em] text-[#07A1EB] uppercase">
                                         {step.title}
                                     </p>
                                     <h5 className="font-display mt-2 text-xl font-bold text-white">
@@ -322,15 +322,15 @@ export default function Home() {
                                             <div className="absolute right-0 bottom-8 hidden w-px bg-[#D5DDE8] lg:top-8 lg:block" />
                                         ) : null}
                                         {i > 0 ? (
-                                            <span className="absolute top-1/2 left-0 z-10 hidden size-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#1A9B8E] ring-1 ring-[#D5DDE8] lg:flex">
+                                            <span className="absolute top-1/2 left-0 z-10 hidden size-8 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-[#022B99] ring-1 ring-[#D5DDE8] lg:flex">
                                                 <ArrowRight className="size-4" />
                                             </span>
                                         ) : null}
 
-                                        <span className="flex size-11 items-center justify-center rounded-2xl bg-[#E6F5F3] text-[#1A9B8E]">
+                                        <span className="flex size-11 items-center justify-center rounded-2xl bg-[#E6F5F3] text-[#022B99]">
                                             <Icon className="size-5" strokeWidth={2} />
                                         </span>
-                                        <p className="mt-5 text-[11px] font-semibold tracking-[0.16em] text-[#1A9B8E] uppercase">
+                                        <p className="mt-5 text-[11px] font-semibold tracking-[0.16em] text-[#022B99] uppercase">
                                             {step.label}
                                         </p>
                                         <h5 className="font-display mt-2 text-xl font-bold text-[#0A1628]">
@@ -341,14 +341,14 @@ export default function Home() {
                                         </p>
                                         <div className="mt-6 h-1 overflow-hidden rounded-full bg-[#E8EEF8]">
                                             <div
-                                                className="h-full rounded-full bg-[#1A9B8E]"
+                                                className="h-full rounded-full bg-[#022B99]"
                                                 style={{
                                                     width: `${((i + 1) / compounding.length) * 100}%`,
                                                 }}
                                             />
                                         </div>
                                         {i < compounding.length - 1 ? (
-                                            <p className="mt-4 flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.16em] text-[#1A9B8E] uppercase lg:hidden">
+                                            <p className="mt-4 flex items-center gap-1.5 text-[10px] font-semibold tracking-[0.16em] text-[#022B99] uppercase lg:hidden">
                                                 Cascades
                                                 <ArrowRight className="size-3" />
                                             </p>
@@ -381,12 +381,12 @@ export default function Home() {
                     <div className="mt-12 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
                         {roadmap.map((phase, i) => (
                             <FadeIn key={phase.phase} delay={i * 0.05}>
-                                <div className="border-l-2 border-[#1A9B8E] bg-white/5 px-5 py-4 backdrop-blur-sm">
+                                <div className="border-l-2 border-[#022B99] bg-white/5 px-5 py-4 backdrop-blur-sm">
                                     <div className="flex items-baseline justify-between gap-3">
                                         <p className="font-display text-lg font-bold text-white">
                                             {phase.title}
                                         </p>
-                                        <span className="text-xs font-medium text-[#7FD4CB]">
+                                        <span className="text-xs font-medium text-[#07A1EB]">
                                             {phase.timing}
                                         </span>
                                     </div>

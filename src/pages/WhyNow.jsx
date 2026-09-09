@@ -84,7 +84,7 @@ export default function WhyNow() {
                       <span
                         className={cn(
                           "font-nav text-[11px] font-semibold uppercase tracking-[0.16em]",
-                          isActive ? "text-[#7FD4CB]" : "text-[#1A9B8E]"
+                          isActive ? "text-[#07A1EB]" : "text-[#022B99]"
                         )}
                       >
                         0{i + 1}
@@ -93,7 +93,7 @@ export default function WhyNow() {
                         className={cn(
                           "size-5 transition",
                           isActive
-                            ? "text-[#7FD4CB]"
+                            ? "text-[#07A1EB]"
                             : "text-[#5A6B7D] group-hover:text-[#022F84]"
                         )}
                         strokeWidth={1.75}
@@ -144,18 +144,18 @@ export default function WhyNow() {
                   <div className="absolute inset-0 bg-gradient-to-t from-[#011B4D] via-[#011B4D]/45 to-transparent lg:bg-gradient-to-r lg:from-transparent lg:via-[#011B4D]/40 lg:to-[#011B4D]" />
 
                   <div className="absolute top-6 left-6 flex size-14 items-center justify-center rounded-2xl bg-white/10 backdrop-blur-md ring-1 ring-white/20">
-                    <Icon className="size-7 text-[#7FD4CB]" strokeWidth={1.75} />
+                    <Icon className="size-7 text-[#07A1EB]" strokeWidth={1.75} />
                   </div>
 
                   <div className="absolute right-6 bottom-6 left-6 lg:hidden">
-                    <p className="font-nav text-xs font-semibold uppercase tracking-[0.18em] text-[#7FD4CB]">
+                    <p className="font-nav text-xs font-semibold uppercase tracking-[0.18em] text-[#07A1EB]">
                       Force 0{active + 1} · {current.title}
                     </p>
                   </div>
                 </div>
 
                 <div className="flex flex-col justify-center px-8 py-10 md:px-12 md:py-14">
-                  <p className="font-nav text-xs font-semibold uppercase tracking-[0.18em] text-[#7FD4CB]">
+                  <p className="font-nav text-xs font-semibold uppercase tracking-[0.18em] text-[#07A1EB]">
                     Force 0{active + 1} · {current.title}
                   </p>
                   <h3 className="font-display mt-4 text-3xl font-extrabold text-white text-balance sm:text-4xl md:text-5xl">
@@ -232,7 +232,7 @@ export default function WhyNow() {
                 key={item.label}
                 className="border-t border-white/25 pt-5"
               >
-                <p className="font-display text-xl font-bold text-[#7FD4CB]">
+                <p className="font-display text-xl font-bold text-[#07A1EB]">
                   {item.label}
                 </p>
                 <p className="mt-2 text-sm text-white/65">{item.detail}</p>

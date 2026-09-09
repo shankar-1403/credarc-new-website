@@ -14,7 +14,7 @@ export default function Value() {
 
       <section className="mx-auto max-w-7xl px-6 py-12 md:px-8 md:py-14">
         <FadeIn className="mb-8 max-w-2xl">
-          <p className="mb-2 text-xs font-semibold tracking-[0.18em] text-[#1A9B8E] uppercase">
+          <p className="mb-2 text-xs font-semibold tracking-[0.18em] text-[#022B99] uppercase">
             Board outcomes
           </p>
           <h2 className="font-display text-3xl font-bold tracking-tight text-[#0A1628] text-balance sm:text-4xl md:text-5xl">
@@ -32,7 +32,7 @@ export default function Value() {
             />
             <div className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/55 to-transparent" />
             <div className="relative flex h-full min-h-[240px] flex-col justify-end p-6 md:min-h-[320px] md:p-7">
-              <p className="font-nav text-[11px] font-semibold tracking-[0.16em] text-[#7FD4CB] uppercase">
+              <p className="font-nav text-[11px] font-semibold tracking-[0.16em] text-[#07A1EB] uppercase">
                 The value created
               </p>
               <p className="font-display mt-2 max-w-md text-2xl font-bold text-white text-balance md:text-3xl">
@@ -77,7 +77,7 @@ export default function Value() {
               delay={0.08 + i * 0.03}
               className="rounded-2xl border border-[#D5DDE8] bg-white p-5 md:rounded-3xl"
             >
-              <p className="font-nav text-[10px] font-semibold tracking-[0.16em] text-[#1A9B8E] uppercase">
+              <p className="font-nav text-[10px] font-semibold tracking-[0.16em] text-[#022B99] uppercase">
                 {String(i + 1).padStart(2, "0")}
               </p>
               <h3 className="font-display mt-1 text-lg font-bold text-[#0A1628]">
