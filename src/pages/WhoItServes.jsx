@@ -141,9 +141,9 @@ export default function WhoItServes() {
                   ref={(el) => {
                     chapterRefs.current[i] = el;
                   }}
-                  className="scroll-mt-28 flex flex-col justify-center border-t border-[#D5DDE8] py-8 first:border-t-0 lg:min-h-[75vh] lg:py-12"
+                  className="scroll-mt-24 flex flex-col justify-center border-t border-[#D5DDE8] py-6 first:border-t-0 sm:py-8 lg:min-h-[75vh] lg:scroll-mt-28 lg:py-12"
                 >
-                  <div className="relative mb-5 aspect-[16/10] w-full overflow-hidden rounded-2xl lg:hidden">
+                  <div className="relative mb-4 aspect-[16/10] w-full overflow-hidden rounded-2xl lg:hidden">
                     <img
                       src={segment.image}
                       alt=""

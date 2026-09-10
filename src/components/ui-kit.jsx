@@ -90,7 +90,7 @@ export function PageHero({
     <section
       className={cn(
         "relative overflow-hidden",
-        compact ? "min-h-[52vh]" : "min-h-[70vh]"
+        compact ? "min-h-[48vh] sm:min-h-[52vh]" : "min-h-[56vh] sm:min-h-[70vh]"
       )}
     >
       <img
@@ -98,26 +98,26 @@ export function PageHero({
         alt=""
         className="absolute inset-0 h-full w-full object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#011B4D]/92 via-[#022F84]/78 to-[#011B4D]/45" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[#011B4D]/80 via-[#022F84]/78 to-[#011B4D]/90 sm:bg-gradient-to-r sm:from-[#011B4D]/92 sm:via-[#022F84]/78 sm:to-[#011B4D]/45" />
       <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(26,155,142,0.25),transparent_45%)]" />
       <div
         className={cn(
-          "relative mx-auto flex max-w-7xl flex-col justify-end px-6 pb-16 pt-32 md:px-8",
-          compact ? "min-h-[52vh]" : "min-h-[70vh]"
+          "relative mx-auto flex max-w-7xl flex-col justify-end px-5 pb-10 pt-24 sm:px-6 sm:pb-16 sm:pt-32 md:px-8",
+          compact ? "min-h-[48vh] sm:min-h-[52vh]" : "min-h-[56vh] sm:min-h-[70vh]"
         )}
       >
-        <p className="mb-4 text-xs font-semibold uppercase tracking-[0.2em] text-[#07A1EB]">
+        <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.2em] text-[#07A1EB] sm:mb-4 sm:text-xs">
           {label}
         </p>
-        <h1 className="font-display max-w-4xl text-4xl font-extrabold text-white text-balance sm:text-5xl md:text-6xl">
+        <h1 className="font-display max-w-4xl text-[1.85rem] font-extrabold leading-[1.12] text-white text-balance sm:text-5xl md:text-6xl">
           {title}
         </h1>
         {description ? (
-          <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg">
+          <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/80 sm:mt-5 sm:text-base md:text-lg">
             {description}
           </p>
         ) : null}
-        {actions ? <div className="mt-8 flex flex-wrap gap-3">{actions}</div> : null}
+        {actions ? <div className="mt-6 flex flex-wrap gap-3 sm:mt-8">{actions}</div> : null}
       </div>
     </section>
   );

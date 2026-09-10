@@ -89,7 +89,10 @@ export default function Platform() {
                     className="group relative flex flex-col items-center px-5 py-5 md:px-6 md:py-6"
                   >
                     {i < platformCosts.length - 1 ? (
-                      <div className="absolute inset-y-5 right-0 hidden w-px bg-[#D5DDE8] sm:block" />
+                      <>
+                        <div className="absolute inset-x-8 bottom-0 h-px bg-[#D5DDE8] sm:hidden" />
+                        <div className="absolute inset-y-5 right-0 hidden w-px bg-[#D5DDE8] sm:block" />
+                      </>
                     ) : null}
 
                     <span className="flex size-8 items-center justify-center rounded-xl bg-[#E6F5F3] text-[#022B99] transition duration-300 group-hover:bg-[#022B99] group-hover:text-white">

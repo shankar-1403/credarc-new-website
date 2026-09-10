@@ -193,8 +193,8 @@ export default function Home() {
                                             }`}
                                         >
                                             <div
-                                                className={`flex max-w-xl items-start gap-5 ${
-                                                    contentRight ? "text-right flex-row-reverse" : ""
+                                                className={`flex flex-col max-w-xl gap-5 ${
+                                                    contentRight ? "text-right md:flex-row-reverse md:items-start" : "md:flex-row text-left"
                                                 }`}
                                             >
                                                 <div className="shrink-0">
