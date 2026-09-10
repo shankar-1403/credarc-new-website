@@ -37,7 +37,7 @@ export default function Home() {
                     />
                 </motion.div>
 
-                <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(1,16,31,0.92)_0%,rgba(2,47,132,0.55)_48%,rgba(1,27,77,0.72)_100%)]" />
+                <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(31,172,165,0.9)_0%,rgba(2,47,132,0.55)_48%,rgba(1,27,77,0.72)_100%)]" />
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_85%_15%,rgba(26,155,142,0.35),transparent_55%)]" />
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_90%,rgba(2,47,132,0.5),transparent_40%)]" />
 
