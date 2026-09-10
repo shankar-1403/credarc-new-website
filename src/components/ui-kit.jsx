@@ -98,8 +98,9 @@ export function PageHero({
         alt=""
         className="absolute inset-0 h-full w-full object-cover"
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-[#011B4D]/80 via-[#022F84]/78 to-[#011B4D]/90 sm:bg-gradient-to-r sm:from-[#011B4D]/92 sm:via-[#022F84]/78 sm:to-[#011B4D]/45" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_20%,rgba(26,155,142,0.25),transparent_45%)]" />
+      <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(31,172,165,0.9)_0%,rgba(2,47,132,0.55)_48%,rgba(1,27,77,0.72)_100%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_85%_15%,rgba(26,155,142,0.35),transparent_55%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_90%,rgba(2,47,132,0.5),transparent_40%)]" />
       <div
         className={cn(
           "relative mx-auto flex max-w-7xl flex-col justify-end px-5 pb-10 pt-24 sm:px-6 sm:pb-16 sm:pt-32 md:px-8",
