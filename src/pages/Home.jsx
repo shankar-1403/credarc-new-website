@@ -37,11 +37,11 @@ export default function Home() {
                     />
                 </motion.div>
 
-                <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(31,172,165,0.9)_0%,rgba(2,47,132,0.55)_48%,rgba(1,27,77,0.72)_100%)]" />
+                <div className="absolute inset-0 bg-[linear-gradient(115deg,rgba(31,172,165,0.9)_20%,rgba(2,47,132,0.55)_60%,rgba(1,27,77,0.72)_100%)]" />
                 <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_60%_at_85%_15%,rgba(26,155,142,0.35),transparent_55%)]" />
                 <div className="absolute inset-0 bg-[radial-gradient(circle_at_10%_90%,rgba(2,47,132,0.5),transparent_40%)]" />
 
-                {!reduce && (
+                {/* {!reduce && (
                     <>
                         <motion.div
                             className="pointer-events-none absolute -top-24 -right-16 size-[28rem] rounded-full bg-[#022B99]/20 blur-3xl"
@@ -54,7 +54,7 @@ export default function Home() {
                             transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
                         />
                     </>
-                )}
+                )} */}
 
                 <div className="pointer-events-none absolute inset-x-6 top-24 bottom-10 border border-white/10 md:inset-x-10 md:top-28 md:bottom-12" />
                 <div className="pointer-events-none absolute top-24 right-6 left-6 h-px bg-gradient-to-r from-transparent via-[#07A1EB]/50 to-transparent md:top-28 md:right-10 md:left-10" />
