@@ -1,29 +1,34 @@
-# Contact form → Firebase → Google Sheets
+# Contact form → Firebase → Google Sheets (scheduled sync)
 
-The site's Contact form (`src/pages/Contact.jsx`) submits in two steps,
-same structure as the PCRED site's contact pipeline:
+The site's Contact form ([src/pages/Contact.jsx](../src/pages/Contact.jsx))
+writes straight to **Firebase Realtime Database** — nothing else. A separate
+**Google Apps Script running on a time-driven trigger** periodically pulls
+whatever is new from the database and appends it to a Google Sheet.
 
-1. **Firebase Realtime Database** (`src/lib/firebase.js`) — the submission
-   is written to the `contact_submissions` node first. This is the durable
-   record of the lead.
-2. **Google Apps Script → Google Sheet** (`Code.gs` in this folder) — the
-   same submission is then relayed to a Google Sheet as a convenience
-   mirror. If this step fails (network hiccup, script not deployed yet),
-   the submission is still safely in Firebase — it does not block the user
-   from seeing "submitted".
+```
+Browser (Contact form)
+        │  push()
+        ▼
+Firebase Realtime Database   (contact_submissions/*)
+        ▲
+        │  polled every 5 min
+        │
+Google Apps Script (syncSubmissions, trigger-driven)
+        │  appendRow()
+        ▼
+Google Sheet ("Contact Submissions" tab)
+```
 
-Both steps run client-side (this is a static Vite SPA with no Node
-server), unlike PCRED's Next.js API route which did this server-side —
-functionally the same order of operations, just called directly from the
-browser.
+The client never talks to Apps Script directly, and the Sheet never needs
+to be reachable from the browser — the pull happens entirely on Google's
+side, on a schedule.
 
 ## Setup
 
 ### 1. Firebase Realtime Database rules
 
-The database is already configured in `src/lib/firebase.js` (project
-`credarc-esg-website`). Make sure the Realtime Database's rules allow
-writes to `contact_submissions` from the site, e.g.:
+In the Firebase Console → project `credarc-esg-website` → Realtime
+Database → **Rules**, set:
 
 ```json
 {
@@ -31,35 +36,55 @@ writes to `contact_submissions` from the site, e.g.:
     "contact_submissions": {
       ".read": false,
       ".write": true
+    },
+    "$other": {
+      ".read": false,
+      ".write": false
     }
   }
 }
 ```
 
-(Tighten this to your actual security needs — e.g. rate limiting via
-App Check — before going to production if spam is a concern.)
+This lets the public site write submissions but not read them back
+(`.read: false`). The Apps Script sync bypasses this using a database
+secret (next step), so this stays locked down.
 
-### 2. Google Apps Script → Sheets relay
+### 2. Get a Firebase database secret
 
-1. Create a new Google Sheet (or open the one you want submissions in).
-2. **Extensions → Apps Script**, replace the default code with the contents
-   of [`Code.gs`](./Code.gs).
-3. **Deploy → New deployment → Web app**
-   - Execute as: **Me**
-   - Who has access: **Anyone**
-4. Copy the deployment URL (ends in `/exec`).
-5. In the project root, copy `.env.example` to `.env` and set:
+Apps Script needs a way to read the database even though public reads are
+off. In the Firebase Console → **Project settings** (gear icon) →
+**Service accounts** tab → **Database secrets** → generate/reveal a
+legacy secret. Copy it.
+
+(This is Firebase's older "legacy token" auth method for the Realtime
+Database REST API — it still works and is the simplest option for a
+script like this that isn't running as a real backend.)
+
+### 3. Set up the Apps Script
+
+1. Open your Google Sheet → **Extensions → Apps Script**.
+2. Replace the default code with the contents of [`Code.gs`](./Code.gs).
+3. At the top of the file, set:
+   ```js
+   const DATABASE_URL = "https://credarc-esg-website-default-rtdb.asia-southeast1.firebasedatabase.app";
+   const DATABASE_SECRET = "<paste the secret from step 2>";
    ```
-   VITE_GOOGLE_SCRIPT_URL=<paste the deployment URL here>
-   ```
-6. Restart `npm run dev` (or rebuild) so Vite picks up the new env var.
+4. In the function dropdown at the top of the editor, select **setupTrigger**
+   and click **Run** (▶). This creates a trigger that calls
+   `syncSubmissions` automatically every 5 minutes. The first run will ask
+   you to authorize the script — allow it.
+5. (Optional) Run **syncSubmissions** once manually to pull in anything
+   already sitting in the database from testing.
+
+There is **no web app deployment** needed for this version — it's
+trigger-driven, not HTTP-driven.
 
 Submissions land in a sheet tab called **Contact Submissions** (auto-created
-on first submission) with columns: Timestamp, Full name, Work email, Phone
+on first sync) with columns: Timestamp, Full name, Work email, Phone
 number, Company, You are, Message, Source page.
 
-## Updating the script later
+## Changing the sync interval
 
-Any time you edit `Code.gs` in the Apps Script editor, you must redeploy for
-the live URL to reflect changes: **Deploy → Manage deployments → pencil icon
-→ New version → Deploy**.
+Edit the `.everyMinutes(5)` call in `setupTrigger`, then re-run
+`setupTrigger` once (it clears any existing trigger for this function
+before creating the new one, so it won't double up).

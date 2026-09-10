@@ -1,28 +1,41 @@
 /**
- * Credarc website — Contact form -> Google Sheets backend.
+ * Credarc website — Firebase Realtime Database -> Google Sheets sync.
+ *
+ * The contact form (src/pages/Contact.jsx) writes each submission straight
+ * into Firebase Realtime Database, under `contact_submissions`. This script
+ * runs on a time-driven trigger, pulls whatever is new since the last run,
+ * and appends it to this Sheet — it does NOT run on every form submission,
+ * it polls on an interval (e.g. every 5 minutes).
  *
  * SETUP:
- * 1. Create (or open) a Google Sheet that will collect submissions.
- * 2. In the Sheet, go to Extensions > Apps Script.
+ * 1. In Firebase Console -> Project settings -> Service accounts ->
+ *    Database secrets, generate a legacy secret (or use one you already
+ *    have). This lets the script read the database even though public
+ *    read access is off in the security rules.
+ * 2. Open your Google Sheet -> Extensions > Apps Script.
  * 3. Delete any boilerplate code and paste this file's contents in.
- * 4. In the script editor, set the SHEET_NAME constant below to match the
- *    tab name you want rows written to (a tab with that name is created
- *    automatically if it doesn't exist).
- * 5. Deploy > New deployment > select type "Web app".
- *      - Execute as: Me
- *      - Who has access: Anyone
- * 6. Copy the deployment's Web app URL and put it in the site's .env file
- *    as VITE_GOOGLE_SCRIPT_URL (see .env.example).
- * 7. Whenever you edit this script, redeploy (Deploy > Manage deployments
- *    > pencil icon > New version) so the live URL picks up your changes.
+ * 4. Set DATABASE_URL and DATABASE_SECRET below.
+ * 5. Run `setupTrigger` once from the script editor (select it from the
+ *    function dropdown, click Run). This creates a time-driven trigger
+ *    that calls `syncSubmissions` automatically every 5 minutes. Google
+ *    will ask you to authorize the script the first time.
+ * 6. Optionally run `syncSubmissions` once manually to pull in anything
+ *    already sitting in the database.
+ *
+ * You do NOT need to "deploy as web app" for this — there is no HTTP
+ * endpoint here, it's purely trigger-driven.
  */
 
-const SHEET_NAME = "Contact Submissions";
+const DATABASE_URL =
+  "https://credarc-esg-website-default-rtdb.asia-southeast1.firebasedatabase.app";
+const DATABASE_SECRET = "PASTE_YOUR_FIREBASE_DATABASE_SECRET_HERE";
 
-// Columns written to the sheet, in order. Keys must match the field
-// names sent from the contact form (src/pages/Contact.jsx).
+const SHEET_NAME = "Contact Submissions";
+const LAST_KEY_PROPERTY = "lastSyncedSubmissionKey";
+
+// Columns written to the sheet, in order.
 const FIELDS = [
-  { key: "timestamp", label: "Timestamp" },
+  { key: "submittedAt", label: "Timestamp" },
   { key: "name", label: "Full name" },
   { key: "email", label: "Work email" },
   { key: "phone", label: "Phone number" },
@@ -32,38 +45,61 @@ const FIELDS = [
   { key: "source", label: "Source page" },
 ];
 
-function doPost(e) {
-  try {
-    const data = parseRequest(e);
-    const sheet = getOrCreateSheet();
-    appendRow(sheet, data);
-    return jsonResponse({ result: "success" });
-  } catch (err) {
-    return jsonResponse({ result: "error", message: String(err) });
-  }
+/** Run this once manually to create the recurring trigger. */
+function setupTrigger() {
+  // Avoid creating duplicate triggers if this is run more than once.
+  ScriptApp.getProjectTriggers().forEach((t) => {
+    if (t.getHandlerFunction() === "syncSubmissions") {
+      ScriptApp.deleteTrigger(t);
+    }
+  });
+
+  ScriptApp.newTrigger("syncSubmissions")
+    .timeBased()
+    .everyMinutes(5)
+    .create();
 }
 
-// Allows a quick GET check that the deployment is live.
-function doGet() {
-  return jsonResponse({ result: "ok", message: "Credarc form endpoint is live." });
+/** Called automatically by the trigger created in setupTrigger. */
+function syncSubmissions() {
+  const properties = PropertiesService.getScriptProperties();
+  const lastKey = properties.getProperty(LAST_KEY_PROPERTY);
+
+  const submissions = fetchNewSubmissions(lastKey);
+  const keys = Object.keys(submissions);
+
+  if (keys.length === 0) return;
+
+  const sheet = getOrCreateSheet();
+  keys.sort(); // Firebase push() keys sort chronologically.
+
+  keys.forEach((key) => {
+    appendRow(sheet, submissions[key]);
+  });
+
+  const newestKey = keys[keys.length - 1];
+  properties.setProperty(LAST_KEY_PROPERTY, newestKey);
 }
 
-function parseRequest(e) {
-  if (!e || !e.postData || !e.postData.contents) {
-    throw new Error("No form data received.");
+function fetchNewSubmissions(lastKey) {
+  let url =
+    DATABASE_URL +
+    "/contact_submissions.json?auth=" +
+    encodeURIComponent(DATABASE_SECRET) +
+    "&orderBy=%22$key%22";
+
+  if (lastKey) {
+    // startAt is inclusive, so we'll filter the already-seen key back out.
+    url += "&startAt=%22" + encodeURIComponent(lastKey) + "%22";
   }
 
-  let data;
-  const contentType = e.postData.type || "";
+  const response = UrlFetchApp.fetch(url, { muteHttpExceptions: true });
+  const data = JSON.parse(response.getContentText() || "{}") || {};
 
-  if (contentType.indexOf("application/json") !== -1) {
-    data = JSON.parse(e.postData.contents);
-  } else {
-    // Fallback: x-www-form-urlencoded / multipart, available via e.parameter.
-    data = e.parameter || {};
+  if (lastKey && data[lastKey]) {
+    delete data[lastKey];
   }
 
-  data.timestamp = new Date();
   return data;
 }
 
@@ -81,12 +117,6 @@ function getOrCreateSheet() {
 }
 
 function appendRow(sheet, data) {
-  const row = FIELDS.map((f) => data[f.key] || "");
+  const row = FIELDS.map((f) => (data && data[f.key]) || "");
   sheet.appendRow(row);
-}
-
-function jsonResponse(obj) {
-  return ContentService.createTextOutput(JSON.stringify(obj)).setMimeType(
-    ContentService.MimeType.JSON
-  );
 }
