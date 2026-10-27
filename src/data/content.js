@@ -4,7 +4,7 @@ export const company = {
   cin: "U62099MH2026PTC472660",
   email: "info@credarc.in",
   office:
-    "Unit-520, Lodha Supremus, Off Mahakal Caves Road, Andheri East, Mumbai, Maharashtra 400069, India",
+    "Unit-511, Lodha Supremus, Off Mahakali Caves Road, Andheri East, Mumbai, Maharashtra 400069, India",
   tagline: "AI-driven ESG intelligence",
 };
 
